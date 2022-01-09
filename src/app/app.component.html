@@ -1,0 +1,278 @@
+<body>
+  <!-- -------------- -->
+  <!-- ---Tab Menu--- -->
+  <!-- -------------- -->
+  <ul class="nav nav-tabs justify-content-center" id="Tab" role="tablist">
+    <li class="nav-item">
+      <a
+        class="nav-link active"
+        id="film-tab"
+        data-toggle="tab"
+        href="#film"
+        role="tab"
+        aria-controls="film"
+        aria-selected="true"
+        >Popüler Filmler</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        id="series-tab"
+        data-toggle="tab"
+        href="#series"
+        role="tab"
+        aria-controls="series"
+        aria-selected="false"
+        >Popüler Diziler</a
+      >
+    </li>
+    
+  </ul>
+  <!-- -------------- -->
+  <!--Tab Menu Finish -->
+  <!-- -------------- -->
+  <div class="container" style="position:absolute; right:10px !important;top:-21px !important; padding-bottom:10px !important; width: 200px !important;">
+    <div class="row">
+      <div class="search-hero mx-auto mt-4">
+        <input
+          class="form-control"
+          type="text"
+          name="search"
+          [(ngModel)]="searchText"
+          autocomplete="off"
+          placeholder="Aramaya Başla"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="tab-content" id="TabContent">
+    <!-- -------------- -->
+    <!-- Film Tab Start -->
+    <!-- -------------- -->
+
+    <div
+      class="tab-pane fade show active"
+      id="film"
+      role="tabpanel"
+      aria-labelledby="film-tab"
+    >
+    <div id="carousel">
+      <div class="slide" *ngFor="let item of movies let i = index">
+        <button
+        data-toggle="collapse"
+        type="button"
+        class="btn btn-transparent"
+        data-toggle="modal"
+        [attr.data-target]="'#movie' + i"
+      >
+        <img
+        class="filmIMG" 
+        src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{
+          item.poster_path
+        }}"
+        alt=""
+      />
+        </button>
+      </div>
+     
+  </div>
+      <br />
+      <div class="row justify-content-center">
+        <div *ngFor="let item of movies | filter:searchText let i = index">
+          <div class="col-md-3">
+            <button
+              data-toggle="collapse"
+              type="button"
+              class="btn btn-transparent"
+              data-toggle="modal"
+              [attr.data-target]="'#movie' + i"
+            > 
+              <img
+                class="filmIMG"
+                src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{
+                  item.poster_path
+                }}"
+                alt=""
+              />
+            </button>
+
+            <div
+              class="modal fade"
+              id="movie{{ i }}"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      {{ item.original_title }}
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <img
+                      class="detailFilmIMG d-flex mx-auto"
+                      src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{
+                        item.poster_path
+                      }}"
+                      alt=""
+                    />
+                    <br />
+                    Genel Bakış :
+                    <br />
+
+                    {{ item.overview }}
+                    <hr />
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger"
+                      data-dismiss="modal"
+                    >
+                      Kapat
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- -------------- -->
+    <!--Film Tab Finish-->
+    <!-- -------------- -->
+
+    <!-- -------------- -->
+    <!--Series Tab Start-->
+    <!-- -------------- -->
+   
+    <div
+      class="tab-pane fade"
+      id="series"
+      role="tabpanel"
+      aria-labelledby="series-tab"
+    >
+    <div id="carousel">
+      <div class="slide" *ngFor="let item of series let i=index">
+        <button
+              data-toggle="collapse"
+              type="button"
+              class="btn btn-transparent"
+              data-toggle="modal"
+              [attr.data-target]="'#series' + i"
+            >
+        <img
+        class="filmIMG" 
+        src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{
+          item.poster_path
+        }}"
+        alt=""
+      />
+        </button>
+      </div>
+     
+  </div>
+      <div class="container" style="position:absolute; right:10px !important;top:-21px !important; padding-bottom:10px !important; width: 200px !important">
+        <div class="row">
+          <div class="search-hero mx-auto mt-4 mb-4">
+            <input
+              class="form-control"
+              type="text"
+              name="search"
+              [(ngModel)]="searchText"
+              autocomplete="off"
+              placeholder="Aramaya Başla"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div *ngFor="let item of series | filter:searchText let i = index">
+          <div class="col-md-3">
+            <button
+              data-toggle="collapse"
+              type="button"
+              class="btn btn-transparent"
+              data-toggle="modal"
+              [attr.data-target]="'#series' + i"
+            >
+              <img
+                class="filmIMG"
+                src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{
+                  item.poster_path
+                }}"
+                alt=""
+              />
+            </button>
+
+            <div
+              class="modal fade"
+              id="series{{ i }}"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      {{ item.name }}
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <img
+                      class="detailFilmIMG d-flex mx-auto"
+                      src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{
+                        item.poster_path
+                      }}"
+                      alt=""
+                    />
+                    <br />
+                    Genel Bakış :
+                    <br />
+                    {{ item.overview }}
+                    <hr />
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger"
+                      data-dismiss="modal"
+                    >
+                      Kapat
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- -------------- -->
+    <!--Series Tab Finish-->
+    <!-- -------------- -->
+  </div>
+</body>
